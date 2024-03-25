@@ -1,5 +1,6 @@
 {
   "name": "risk-player",
+  "homepage": "https://sleezzi.fr/RiskPlayer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
