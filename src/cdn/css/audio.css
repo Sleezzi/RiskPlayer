@@ -1,0 +1,71 @@
+#audioFileInput {
+    display: none;
+}
+
+#audioFileInput.active {
+    display: flex;
+}
+
+#audioContainer {
+    height: 2rem;
+    width: 100%;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    padding: 1rem 0;
+}
+
+#audioContainer.active {
+    display: flex;
+}
+
+audio {
+    display: none;
+}
+
+button.play {
+    background: transparent;
+    color: var(--color);
+    border: none;
+    cursor: pointer;
+    transition: color .5s ease;
+}
+
+button.play:hover {
+    color: var(--a-color);
+}
+
+#progressBar {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+
+#progressBar progress {
+    -webkit-appearance: none;
+    width: 80%;
+}
+
+#progressBar progress::-webkit-progress-bar {
+    background: var(--alt-background);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+#progressBar progress::-webkit-progress-value {
+    background: var(--a-color);
+}
+
+#progressBar input {
+    position: absolute;
+    width: 80%;
+    -webkit-appearance: none;
+    cursor: pointer;
+    opacity: 0;
+}
