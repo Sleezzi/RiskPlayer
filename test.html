@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecteur Audio avec Barre de Progression Personnalisée</title>
+<style>
+  .custom-audio-player {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .custom-progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .custom-progress-bar .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #4caf50;
+    width: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="custom-audio-player">
+  <audio id="audioPlayer" preload="auto">
+    <source src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="custom-progress-bar" onclick="seek(event)">
+    <div class="progress"></div>
+  </div>
+  <button onclick="playAudio()">Play</button>
+  <button onclick="pauseAudio()">Pause</button>
+</div>
+
+<script>
+  const audioPlayer = document.getElementById('audioPlayer');
+  const progressBar = document.querySelector('.custom-progress-bar');
+  const progress = document.querySelector('.progress');
+
+  function playAudio() {
+    audioPlayer.play();
+  }
+
+  function pauseAudio() {
+    audioPlayer.pause();
+  }
+
+  function updateProgressBar() {
+    const currentTime = audioPlayer.currentTime;
+    const duration = audioPlayer.duration;
+    const progressWidth = (currentTime / duration) * 100;
+    progress.style.width = progressWidth + '%';
+  }
+
+  function seek(event) {
+    const progressBarWidth = progressBar.offsetWidth;
+    const clickX = event.clientX - progressBar.getBoundingClientRect().left;
+    const seekTime = (clickX / progressBarWidth) * audioPlayer.duration;
+    audioPlayer.currentTime = seekTime;
+  }
+
+  audioPlayer.addEventListener('timeupdate', updateProgressBar);
+</script>
+
+</body>
+</html>
