@@ -1,6 +1,7 @@
 :root {
     --background: #222;
     --alt-background: #333;
+    --alt-2-background: #555;
     --color: #FFF;
     --a-color: #7552B6;
     --a-alt-color: #8663C7;
@@ -9,11 +10,6 @@
 body {
     margin: 0;
     font-family: "Bebas Neue", sans-serif;
-}
-
-body.light {
-    --background: #FFF;
-    --color: #000;
 }
 
 #root {
