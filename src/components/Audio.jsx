@@ -12,18 +12,15 @@ export default function Audio({
         if (!audio.url) return;
         document.querySelector("audio").src = audio.url;
         document.querySelector("audio").oncanplaythrough = () => {
-            document.querySelector("#audioFileInput").classList.remove("active");
+            setIsPlaying(true);
+            document.querySelector("audio").play();
             document.querySelector("#audioContainer").classList.add("active");
             document.querySelector("#progressBar > progress").max = document.querySelector("audio").duration;
             document.querySelector("#progressBar > input").max = document.querySelector("audio").duration;
-            let name = audio.name.split(".");
-            name.pop();
-            document.querySelector("#name").innerText = name;
-            document.querySelector("#author").innerText = audio.author;
-            document.querySelector("#cover").src = audio.cover;
-            document.querySelector("title").innerText = `${name} - Risk`;
+            document.querySelector("#title").innerText = audio.title;
+            document.querySelector("#cover").src = audio.cover[512];
+            document.querySelector("title").innerText = `${audio.title} - Risk`;
             setTime(0);
-            togglePlay();
             document.querySelector("audio").oncanplaythrough = () => {};
         }
     }, [audio]);
@@ -93,10 +90,10 @@ export default function Audio({
     return (
         <>
             <div id="audioContainer">
-                <img id="cover"></img>
+                <img id="cover" src={audio.cover[1024]}></img>
                 <div id="about">
-                    <p id="name"></p>
-                    <p id="author">Sleezzi</p>
+                    <p id="title">{audio.title}</p>
+                    {audio.author.map(author => <a key={author.url} href={author.url} target="_blank" className="author">{author.name}</a>)}
                 </div>
                 <button className="play" onClick={togglePlay}>
                     <span className="material-symbols-outlined">play_arrow</span>

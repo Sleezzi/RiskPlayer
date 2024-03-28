@@ -11,7 +11,7 @@ import Body from "./components/index";
 
 function App() {
 
-    const [audio, setAudio] = useState("");
+    const [audio, setAudio] = useState({ title: "", cover: { 512: "", 1024: "" }, author: [ { name: "Sleezzi", url: "#" } ], url: "" });
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoop, setIsLoop] = useState(localStorage.getItem("loop") || false);
     const [time, setTime] = useState(0);

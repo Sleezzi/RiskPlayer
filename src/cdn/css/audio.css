@@ -35,12 +35,17 @@ audio {
     flex-direction: column;
 }
 
-#about #name {
+#about #title {
     font-size: 100%;
 }
 
-#about #author {
+#about .author {
     font-size: 70%;
+    color: var(--color);
+    text-decoration: underline;
+}
+#cover {
+    height: 100%;
 }
 
 button.play, button.loop {

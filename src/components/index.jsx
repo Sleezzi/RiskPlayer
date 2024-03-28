@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-function createCard(name, author, cover, url, id, setTime, setAudio) {
+function createCard(title, author, cover, url, id, setTime, setAudio) {
     const changeTrack = (e) => {
-        setAudio({name, author, cover, url});
+        setAudio({title, author, cover, url});
         setTime(0);
     }
     return (
         <button key={id} className="card" onClick={changeTrack}>
-            <img src={cover === "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png" ? "/RiskPlayer/cdn/img/error_img.png  " : cover} alt="" />
-            <h3 className="name">{name}</h3>
-            <h4 className="author">{author}</h4>
+            <img src={cover[512]} alt="" />
+            <h3 className="name">{title}</h3>
+            {author.map(author => <h4 className="author">{author.name}</h4>)}
         </button>
     );
 }
@@ -23,17 +23,17 @@ export default function Body({
     useEffect(() => {
         (async () => {
             try {
-                let response = await fetch("https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=0995a5ed8d458dfdd348e336e1c7323f&format=json   ");
+                let response = await fetch("http://localhost:3000/audios", { method: "GET" });
                 response = await response.json();
                 setChildren(
                     <main>
                         {
-                            response.tracks.track.map(song => createCard(
-                                song.name,
-                                song.artist.name,
-                                song.image[0]["#text"] || "/RiskPlayer/cdn/img/error_img.png" ,
+                            response.map(song => createCard(
+                                song.title,
+                                song.artists,
+                                song.cover || { 512: "/RiskPlayer/cdn/img/error_img.png", 1024: "/RiskPlayer/cdn/img/error_img.png" },
                                 song.url,
-                                song.listeners,
+                                song.id,
                                 setTime,
                                 setAudio
                             ))
